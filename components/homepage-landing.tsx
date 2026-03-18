@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, AlertTriangle, CheckCircle2, BookOpen, Users, Zap, Target, MessageSquare, BarChart3 } from 'lucide-react'
+import { ArrowRight, CheckCircle2, BookOpen, Users, Zap, Target, MessageSquare, BarChart3, Lightbulb } from 'lucide-react'
 
 type Props = {
   onGetStarted: () => void
@@ -9,23 +9,23 @@ type Props = {
 const challenges = [
   {
     icon: BookOpen,
-    title: 'Generic training that misses the mark',
-    body: 'Most AI courses are built for developers or data scientists. If you work in risk, compliance, operations, or customer service, they feel completely irrelevant — full of jargon and examples that have nothing to do with your day-to-day.',
+    title: 'You deserve learning that speaks your language',
+    body: 'Whether you work in risk, compliance, operations, or relationship management, you deserve training built around your world — with examples, scenarios, and language that actually resonate with your day-to-day work.',
   },
   {
     icon: Users,
-    title: 'No guidance on where to even start',
-    body: 'With hundreds of AI tools, courses, and frameworks available, colleagues spend more time figuring out what to learn than actually learning. There is no clear path based on your role, your team, or your experience level.',
+    title: 'A clear path forward, not an overwhelming list',
+    body: 'With so many AI tools and resources out there, colleagues simply need a trusted guide to show them where to start. A structured, role-based path removes the guesswork and builds confidence from day one.',
   },
   {
     icon: BarChart3,
-    title: 'One-size-fits-all content',
-    body: 'A Relationship Manager and a Software Engineer face completely different AI challenges. Generic training treats everyone the same, leaving people either overwhelmed or bored — and nothing sticks.',
+    title: 'Learning that meets you where you are',
+    body: 'A Relationship Manager and a Software Engineer are on completely different journeys with AI. Great learning adapts to your starting point and your goals — so you always feel challenged but never lost.',
   },
   {
     icon: MessageSquare,
-    title: 'Prompting skills left to chance',
-    body: 'Knowing how to communicate with AI — how to write effective prompts — is the single most important practical skill. Yet almost no corporate training covers it, so colleagues learn bad habits or give up entirely.',
+    title: 'Practical prompting skills you can use today',
+    body: 'Knowing how to communicate with AI effectively is one of the most valuable skills you can develop right now. Colleagues who learn to write great prompts unlock immediate, tangible benefits in their everyday tasks.',
   },
 ]
 
@@ -92,9 +92,9 @@ export default function HomepageLanding({ onGetStarted }: Props) {
               <span className="text-accent">your role.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/75 leading-relaxed text-pretty mb-10 max-w-2xl">
-              Most AI training is built for someone else. The NatWest AI Academy learns who you are,
-              what you do, and where you are starting from — then guides you through the skills that
-              will make a real difference in your work.
+              Every colleague at NatWest has a unique role, unique experience, and unique potential
+              with AI. The AI Academy meets you exactly where you are — and guides you step by step
+              toward skills that make a real difference in your work.
             </p>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <button
@@ -124,19 +124,19 @@ export default function HomepageLanding({ onGetStarted }: Props) {
         </div>
       </section>
 
-      {/* Challenges */}
+      {/* What colleagues need */}
       <section className="py-20 md:py-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-3">
-            <AlertTriangle size={18} className="text-accent shrink-0" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">The problem</span>
+            <Lightbulb size={18} className="text-accent shrink-0" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">What great AI learning looks like</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance mb-4">
-            Why most AI training fails NatWest colleagues
+            Every colleague deserves learning built for them
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mb-14 text-pretty">
-            The demand to understand AI is real and growing — but the training available today
-            was not designed with financial services professionals in mind.
+            The demand to build AI skills is growing fast across NatWest. Colleagues are eager —
+            they just need a learning experience that truly fits who they are and what they do.
           </p>
 
           <div className="grid md:grid-cols-2 gap-5">
@@ -244,7 +244,8 @@ export default function HomepageLanding({ onGetStarted }: Props) {
             Ready to start learning?
           </h2>
           <p className="text-white/70 text-lg mb-10 max-w-xl mx-auto text-pretty">
-            Join your colleagues and begin building the AI skills that matter for your role today.
+            Thousands of colleagues across NatWest are already building their AI skills.
+            Your personalised journey starts in under two minutes.
           </p>
           <button
             onClick={onGetStarted}
