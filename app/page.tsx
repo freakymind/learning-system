@@ -1,19 +1,34 @@
 'use client'
 
 import { useState } from 'react'
+import HomepageLanding from '@/components/homepage-landing'
 import Onboarding, { type UserProfile } from '@/components/onboarding'
 import AppHeader from '@/components/app-header'
 import LearningSidebar from '@/components/learning-sidebar'
 import ChatInterface from '@/components/chat-interface'
 import type { LearningTopic } from '@/lib/learning-paths'
 
+type AppView = 'landing' | 'onboarding' | 'app'
+
 export default function HomePage() {
+  const [view, setView] = useState<AppView>('landing')
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [pendingTopic, setPendingTopic] = useState<LearningTopic | null>(null)
 
-  if (!userProfile) {
-    return <Onboarding onComplete={setUserProfile} />
+  if (view === 'landing') {
+    return <HomepageLanding onGetStarted={() => setView('onboarding')} />
+  }
+
+  if (view === 'onboarding' || !userProfile) {
+    return (
+      <Onboarding
+        onComplete={(profile) => {
+          setUserProfile(profile)
+          setView('app')
+        }}
+      />
+    )
   }
 
   return (
@@ -22,7 +37,10 @@ export default function HomePage() {
         userProfile={userProfile}
         sidebarOpen={sidebarOpen}
         onToggleSidebar={() => setSidebarOpen((v) => !v)}
-        onReset={() => setUserProfile(null)}
+        onReset={() => {
+          setUserProfile(null)
+          setView('landing')
+        }}
       />
 
       <div className="flex flex-1 overflow-hidden">
