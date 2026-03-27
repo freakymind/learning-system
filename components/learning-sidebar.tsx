@@ -191,7 +191,7 @@ export default function LearningSidebar({ userProfile, onTopicClick }: Props) {
       {/* Footer */}
       <div className="px-4 py-3 border-t border-sidebar-border/50">
         <p className="text-xs text-sidebar-foreground/50 text-center">
-          Powered by NatWest AI Academy
+          Powered by GenAI Learning Agent
         </p>
       </div>
     </aside>

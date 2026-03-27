@@ -35,10 +35,10 @@ export default function AppHeader({ userProfile, sidebarOpen, onToggleSidebar, o
         <NatWestLogo />
         <div>
           <span className="text-primary-foreground font-semibold text-sm leading-none block">
-            NatWest AI Academy
+            GenAI Learning Agent
           </span>
           <span className="text-primary-foreground/60 text-xs leading-none">
-            Personalised AI Learning
+            Personalised GenAI Learning
           </span>
         </div>
       </div>

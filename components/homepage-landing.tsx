@@ -161,7 +161,7 @@ function PromptDemo({ onGetStarted }: { onGetStarted: () => void }) {
         <div className="p-5 bg-primary/[0.02]">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
-            <span className="text-xs font-semibold text-accent uppercase tracking-wide">After the AI Academy</span>
+            <span className="text-xs font-semibold text-accent uppercase tracking-wide">After the GenAI Learning Agent</span>
           </div>
           <div className="bg-primary/5 rounded-lg px-3 py-2.5 mb-3 border border-primary/20">
             <p className="text-xs text-foreground font-mono leading-relaxed">{scenario.strong.prompt}</p>
@@ -197,7 +197,7 @@ export default function HomepageLanding({ onGetStarted }: Props) {
           <div className="flex items-center gap-3">
             <NatWestLogo />
             <div className="h-5 w-px bg-white/30" />
-            <span className="text-sm font-medium tracking-wide text-white/90">AI Academy</span>
+            <span className="text-sm font-medium tracking-wide text-white/90">GenAI Learning Agent</span>
           </div>
           <button
             onClick={onGetStarted}
@@ -221,7 +221,7 @@ export default function HomepageLanding({ onGetStarted }: Props) {
             </h1>
             <p className="text-lg md:text-xl text-white/75 leading-relaxed text-pretty mb-10 max-w-2xl">
               Every colleague at NatWest has a unique role, unique experience, and unique potential
-              with AI. The AI Academy meets you exactly where you are — and guides you step by step
+              with AI. The GenAI Learning Agent meets you exactly where you are — and guides you step by step
               toward skills that make a real difference in your work.
             </p>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -325,7 +325,7 @@ export default function HomepageLanding({ onGetStarted }: Props) {
             A learning guide built around you
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mb-14 text-pretty">
-            The NatWest AI Academy pairs a personalised learning path with a conversational AI agent
+            The NatWest GenAI Learning Agent pairs a personalised learning path with a conversational AI agent
             that teaches, challenges, and adapts to you — not the other way around.
           </p>
 
@@ -413,7 +413,7 @@ export default function HomepageLanding({ onGetStarted }: Props) {
         <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <NatWestLogo small />
-            <span className="text-sm text-muted-foreground">AI Academy</span>
+            <span className="text-sm text-muted-foreground">GenAI Learning Agent</span>
           </div>
           <p className="text-xs text-muted-foreground text-center md:text-right">
             For internal NatWest use only. Powered by OpenAI via the Vercel AI Gateway.

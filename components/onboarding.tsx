@@ -68,7 +68,7 @@ export default function Onboarding({ onComplete }: Props) {
         <div className="flex items-center gap-2">
           <NatWestLogo />
           <span className="text-primary-foreground font-semibold text-lg tracking-tight">
-            AI Academy
+            GenAI Learning Agent
           </span>
         </div>
       </header>
@@ -153,7 +153,7 @@ function StepOne({ name, setName }: { name: string; setName: (v: string) => void
     <div>
       <div className="mb-6">
         <span className="inline-block bg-secondary text-secondary-foreground text-xs font-semibold px-3 py-1 rounded-full mb-4">
-          Welcome to NatWest AI Academy
+          Welcome to GenAI Learning Agent
         </span>
         <h1 className="text-2xl font-bold text-foreground text-balance leading-snug">
           Let's personalise your learning journey
