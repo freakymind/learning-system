@@ -1,6 +1,7 @@
 'use client'
 
-import { ArrowRight, CheckCircle2, BookOpen, Users, Zap, Target, MessageSquare, BarChart3, Lightbulb } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowRight, CheckCircle2, BookOpen, Users, Zap, Target, MessageSquare, BarChart3, Lightbulb, ChevronRight, Sparkles } from 'lucide-react'
 
 type Props = {
   onGetStarted: () => void
@@ -43,7 +44,7 @@ const solutions = [
   {
     icon: CheckCircle2,
     title: 'Role-specific prompting mastery',
-    body: 'The Academy teaches you to write prompts that work in your world. Whether you are writing risk assessments, summarising client notes, or drafting code, you will practice the exact prompts that matter to you.',
+    body: 'The Academy teaches you to write prompts that work in your world. Whether you are writing risk assessments, summarising client notes, or drafting code, you will practise the exact prompts that matter to you.',
   },
   {
     icon: MessageSquare,
@@ -58,6 +59,133 @@ const stats = [
   { value: '40+', label: 'Learning topics' },
   { value: '1', label: 'AI guide, just for you' },
 ]
+
+// --- Interactive prompt demo data ---
+type DemoScenario = {
+  id: string
+  label: string
+  role: string
+  weak: { prompt: string; response: string }
+  strong: { prompt: string; response: string }
+}
+
+const DEMO_SCENARIOS: DemoScenario[] = [
+  {
+    id: 'summary',
+    label: 'Summarise a document',
+    role: 'Business Analyst',
+    weak: {
+      prompt: 'Summarise this.',
+      response:
+        'This document covers several topics including processes, risks, and outcomes. There are many points mentioned throughout.',
+    },
+    strong: {
+      prompt:
+        'You are a Business Analyst at NatWest. Summarise the following document in 3 bullet points for a senior stakeholder. Focus on key risks and recommended actions. Use plain English.',
+      response:
+        '• Key risk identified: manual reconciliation process introduces a 12% error rate, affecting downstream reporting.\n• Recommended action: automate the reconciliation step using existing tooling — estimated to save 4 hours per week.\n• Stakeholder note: no budget increase required; delivery is achievable within Q2 with current team capacity.',
+    },
+  },
+  {
+    id: 'email',
+    label: 'Draft a client email',
+    role: 'Relationship Manager',
+    weak: {
+      prompt: 'Write an email to a client.',
+      response:
+        'Dear Client, I hope you are well. I wanted to reach out regarding your account. Please let me know if you have any questions. Kind regards.',
+    },
+    strong: {
+      prompt:
+        'Act as a NatWest Relationship Manager. Draft a short, warm email to a long-standing business client (10+ years) following up after their recent loan application was approved. Mention next steps and offer a call this week. Tone: professional but personal.',
+      response:
+        'Subject: Your loan application — approved and next steps\n\nDear Sarah,\n\nGreat news — your application has been approved. After 10 years of working together, it is always a pleasure to support Greenfield\'s growth.\n\nNext steps: our team will be in touch within 2 business days to finalise the agreement. In the meantime, I\'d love to catch up — are you free for a call Thursday or Friday afternoon?\n\nWarm regards,\nJames',
+    },
+  },
+  {
+    id: 'risk',
+    label: 'Identify risks in a policy',
+    role: 'Risk & Compliance',
+    weak: {
+      prompt: 'What are the risks?',
+      response: 'There could be various risks such as operational risk, compliance risk, and reputational risk.',
+    },
+    strong: {
+      prompt:
+        'You are a Risk & Compliance specialist at a UK retail bank. Review the following draft policy excerpt and identify the top 3 regulatory risks, citing the relevant FCA principle where applicable. Be specific and concise.',
+      response:
+        '1. FCA Principle 6 (Customers\' interests): The opt-out mechanism is buried in section 9 — this may not constitute fair treatment of customers and could attract supervisory attention.\n2. FCA Principle 11 (Relations with regulators): The escalation timeline (72 hours) does not align with current breach reporting obligations under SYSC 18.\n3. Operational risk: No business continuity clause exists for the defined process — a gap that would likely be flagged in the next internal audit.',
+    },
+  },
+]
+
+function PromptDemo({ onGetStarted }: { onGetStarted: () => void }) {
+  const [activeId, setActiveId] = useState(DEMO_SCENARIOS[0].id)
+  const scenario = DEMO_SCENARIOS.find((s) => s.id === activeId)!
+
+  return (
+    <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
+      {/* Scenario tabs */}
+      <div className="flex border-b border-border bg-muted/40">
+        {DEMO_SCENARIOS.map((s) => (
+          <button
+            key={s.id}
+            onClick={() => setActiveId(s.id)}
+            className={`flex-1 text-xs font-medium px-3 py-3 transition-colors border-b-2 ${
+              activeId === s.id
+                ? 'border-primary text-primary bg-card'
+                : 'border-transparent text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            {s.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
+        {/* Weak prompt */}
+        <div className="p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-2 h-2 rounded-full bg-muted-foreground/40 shrink-0" />
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Without coaching</span>
+          </div>
+          <div className="bg-muted/50 rounded-lg px-3 py-2.5 mb-3 border border-border">
+            <p className="text-xs text-muted-foreground font-mono leading-relaxed">{scenario.weak.prompt}</p>
+          </div>
+          <div className="bg-background rounded-lg px-3 py-3 border border-border">
+            <p className="text-xs text-foreground/70 leading-relaxed whitespace-pre-line">{scenario.weak.response}</p>
+          </div>
+        </div>
+
+        {/* Strong prompt */}
+        <div className="p-5 bg-primary/[0.02]">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
+            <span className="text-xs font-semibold text-accent uppercase tracking-wide">After the AI Academy</span>
+          </div>
+          <div className="bg-primary/5 rounded-lg px-3 py-2.5 mb-3 border border-primary/20">
+            <p className="text-xs text-foreground font-mono leading-relaxed">{scenario.strong.prompt}</p>
+          </div>
+          <div className="bg-background rounded-lg px-3 py-3 border border-primary/15">
+            <p className="text-xs text-foreground leading-relaxed whitespace-pre-line">{scenario.strong.response}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-5 py-4 bg-secondary/40 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <p className="text-xs text-muted-foreground">
+          <span className="font-semibold text-foreground">Role shown:</span> {scenario.role} — the Academy adapts this for your specific job.
+        </p>
+        <button
+          onClick={onGetStarted}
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline whitespace-nowrap"
+        >
+          Get your personalised path <ArrowRight size={13} />
+        </button>
+      </div>
+    </div>
+  )
+}
 
 export default function HomepageLanding({ onGetStarted }: Props) {
   return (
@@ -124,6 +252,29 @@ export default function HomepageLanding({ onGetStarted }: Props) {
         </div>
       </section>
 
+      {/* Interactive demo */}
+      <section className="py-20 md:py-24 bg-secondary/20">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex items-center gap-3 mb-3">
+            <Sparkles size={18} className="text-accent shrink-0" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">See the difference</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance mb-4">
+            See what better prompting looks like
+          </h2>
+          <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mb-10 text-pretty">
+            Pick a scenario below and see how the same task produces a completely different result
+            once you know how to guide AI properly. This is what the Academy teaches.
+          </p>
+          <PromptDemo onGetStarted={onGetStarted} />
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="h-px bg-border" />
+      </div>
+
       {/* What colleagues need */}
       <section className="py-20 md:py-24">
         <div className="max-w-6xl mx-auto px-6">
@@ -168,7 +319,7 @@ export default function HomepageLanding({ onGetStarted }: Props) {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-3">
             <CheckCircle2 size={18} className="text-primary shrink-0" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">The solution</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">How the Academy helps</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance mb-4">
             A learning guide built around you
@@ -286,11 +437,10 @@ function NatWestLogo({ small }: { small?: boolean }) {
       aria-label="NatWest logo mark"
       role="img"
     >
-      {/* Stylised NW monogram in brand colours */}
       <rect width="40" height="40" rx="4" fill={small ? '#42145f' : 'white'} fillOpacity={small ? '1' : '0.15'} />
       <path
         d="M7 10 L7 30 L14 30 L20 18 L26 30 L33 30 L33 10 L27 10 L27 22 L20 10 L13 22 L13 10 Z"
-        fill={small ? 'white' : 'white'}
+        fill="white"
         fillOpacity="0.95"
       />
     </svg>

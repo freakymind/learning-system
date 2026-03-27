@@ -19,6 +19,14 @@ function getInitGreeting(profile: UserProfile): string {
   return `Hello! I'm ready to begin. I'm ${profile.name}, a ${profile.role} with ${profile.experience} experience with AI.`
 }
 
+const COACH_CHIPS = [
+  'Give me a real example',
+  'Quiz me on this',
+  'Explain it more simply',
+  'How do I apply this at work?',
+  'What should I learn next?',
+]
+
 export default function ChatInterface({ userProfile, pendingTopic, onTopicConsumed }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -106,7 +114,7 @@ export default function ChatInterface({ userProfile, pendingTopic, onTopicConsum
         <div ref={bottomRef} />
       </div>
 
-      {/* Suggested prompts (shown only at start) */}
+      {/* Quick starters — shown only at the very beginning */}
       {displayMessages.length <= 1 && !isStreaming && (
         <div className="px-4 pb-2">
           <p className="text-xs text-muted-foreground mb-2 font-medium">Quick starters</p>
@@ -115,12 +123,32 @@ export default function ChatInterface({ userProfile, pendingTopic, onTopicConsum
               <button
                 key={prompt}
                 onClick={() => {
-                  setInputValue(prompt)
-                  inputRef.current?.focus()
+                  setInputValue('')
+                  sendMessage({ text: prompt })
                 }}
                 className="text-xs bg-secondary text-secondary-foreground px-3 py-1.5 rounded-lg border border-border hover:border-primary/40 hover:bg-primary/5 transition-all"
               >
                 {prompt}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Coach reply chips — shown after each assistant message */}
+      {!isStreaming && displayMessages.length > 1 && displayMessages[displayMessages.length - 1]?.role === 'assistant' && (
+        <div className="px-4 pb-2">
+          <div className="flex flex-wrap gap-2">
+            {COACH_CHIPS.map((chip) => (
+              <button
+                key={chip}
+                onClick={() => {
+                  setInputValue('')
+                  sendMessage({ text: chip })
+                }}
+                className="text-xs bg-secondary/80 text-secondary-foreground px-3 py-1.5 rounded-full border border-border hover:border-primary/40 hover:bg-primary/5 transition-all"
+              >
+                {chip}
               </button>
             ))}
           </div>
