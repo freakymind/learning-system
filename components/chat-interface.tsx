@@ -98,7 +98,7 @@ export default function ChatInterface({ userProfile, pendingTopic, onTopicConsum
         {displayMessages.length === 0 && (
           <div className="flex justify-center">
             <div className="bg-secondary/60 text-secondary-foreground text-sm rounded-xl px-4 py-3 max-w-xs text-center">
-              Connecting you with Natalie, your AI guide...
+              Connecting you with Athena, your AI guide...
             </div>
           </div>
         )}
@@ -168,7 +168,7 @@ export default function ChatInterface({ userProfile, pendingTopic, onTopicConsum
               e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px'
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Ask Natalie anything about AI..."
+            placeholder="Ask Athena anything about AI..."
             rows={1}
             className="flex-1 resize-none bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none leading-relaxed"
             style={{ minHeight: '24px', maxHeight: '120px' }}
@@ -189,7 +189,7 @@ export default function ChatInterface({ userProfile, pendingTopic, onTopicConsum
           </Button>
         </div>
         <p className="text-center text-xs text-muted-foreground mt-2">
-          Natalie can make mistakes. Always verify important information.
+          Athena can make mistakes. Always verify important information.
         </p>
       </div>
     </div>
@@ -215,7 +215,7 @@ function MessageBubble({ message }: { message: UIMessage }) {
           className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-bold shrink-0 mt-0.5"
           aria-hidden="true"
         >
-          N
+          A
         </div>
       )}
       <div
@@ -279,7 +279,7 @@ function TypingIndicator() {
   return (
     <div className="flex gap-3 justify-start">
       <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-bold shrink-0">
-        N
+        A
       </div>
       <div className="bg-card border border-border rounded-2xl rounded-bl-sm px-4 py-3">
         <div className="flex gap-1 items-center h-4">
