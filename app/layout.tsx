@@ -10,8 +10,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'NatWest AI Academy',
-  description: 'Your personalised AI and prompting learning guide — powered by NatWest.',
+  title: 'GenAI Learning Agent',
+  description: 'Your personalised GenAI and prompting learning guide — powered by NatWest.',
   generator: 'v0.app',
 }
 
