@@ -18,6 +18,7 @@ export const ROLES = [
   'Finance',
   'Marketing',
   'Manager / Leader',
+  'Strategy Manager',
   'Other',
 ] as const
 
@@ -258,6 +259,29 @@ const ROLE_SPECIFIC_TOPICS: Record<string, LearningTopic[]> = {
       title: 'Strategic AI Adoption for Teams',
       description: 'How to introduce AI tools and upskill your team effectively.',
       estimatedTime: '25 min',
+      category: 'role-specific',
+    },
+  ],
+  'Strategy Manager': [
+    {
+      id: 'ai-strategy-analysis',
+      title: 'AI for Strategic Analysis',
+      description: 'Use AI to synthesise market data, competitor signals, and internal insights into sharp strategic views.',
+      estimatedTime: '25 min',
+      category: 'role-specific',
+    },
+    {
+      id: 'ai-scenario-planning',
+      title: 'Scenario Planning with AI',
+      description: 'Generate, stress-test, and refine strategic scenarios faster with AI as a thinking partner.',
+      estimatedTime: '25 min',
+      category: 'role-specific',
+    },
+    {
+      id: 'ai-exec-comms',
+      title: 'AI for Executive Communications',
+      description: 'Draft compelling board papers, strategy decks, and briefing notes with AI assistance.',
+      estimatedTime: '20 min',
       category: 'role-specific',
     },
   ],

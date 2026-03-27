@@ -119,6 +119,27 @@ export default function LearningSidebar({ userProfile, onTopicClick }: Props) {
 
       {/* Topics list */}
       <div className="flex-1 overflow-y-auto py-3">
+
+        {/* Suggested next topic */}
+        {(() => {
+          const nextTopic = topics.find((t) => !completedIds.has(t.id))
+          if (!nextTopic) return null
+          return (
+            <div className="mx-3 mb-4 rounded-lg bg-sidebar-primary/20 border border-sidebar-primary/30 p-3">
+              <p className="text-xs font-semibold text-sidebar-primary-foreground/70 uppercase tracking-wide mb-1">Up next</p>
+              <button
+                onClick={() => onTopicClick(nextTopic)}
+                className="text-left w-full group"
+              >
+                <p className="text-sm font-semibold text-white group-hover:text-sidebar-primary leading-snug transition-colors">
+                  {nextTopic.title}
+                </p>
+                <p className="text-xs text-sidebar-foreground/60 mt-0.5">{nextTopic.estimatedTime}</p>
+              </button>
+            </div>
+          )
+        })()}
+
         <p className="px-4 text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider mb-2">
           Your Learning Path
         </p>

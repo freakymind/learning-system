@@ -19,6 +19,14 @@ function getInitGreeting(profile: UserProfile): string {
   return `Hello! I'm ready to begin. I'm ${profile.name}, a ${profile.role} with ${profile.experience} experience with AI.`
 }
 
+const COACH_CHIPS = [
+  'Give me a real example',
+  'Quiz me on this',
+  'Explain it more simply',
+  'How do I apply this at work?',
+  'What should I learn next?',
+]
+
 export default function ChatInterface({ userProfile, pendingTopic, onTopicConsumed }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -90,7 +98,7 @@ export default function ChatInterface({ userProfile, pendingTopic, onTopicConsum
         {displayMessages.length === 0 && (
           <div className="flex justify-center">
             <div className="bg-secondary/60 text-secondary-foreground text-sm rounded-xl px-4 py-3 max-w-xs text-center">
-              Connecting you with Natalie, your AI guide...
+              Connecting you with Athena, your AI guide...
             </div>
           </div>
         )}
@@ -106,7 +114,7 @@ export default function ChatInterface({ userProfile, pendingTopic, onTopicConsum
         <div ref={bottomRef} />
       </div>
 
-      {/* Suggested prompts (shown only at start) */}
+      {/* Quick starters — shown only at the very beginning */}
       {displayMessages.length <= 1 && !isStreaming && (
         <div className="px-4 pb-2">
           <p className="text-xs text-muted-foreground mb-2 font-medium">Quick starters</p>
@@ -115,12 +123,32 @@ export default function ChatInterface({ userProfile, pendingTopic, onTopicConsum
               <button
                 key={prompt}
                 onClick={() => {
-                  setInputValue(prompt)
-                  inputRef.current?.focus()
+                  setInputValue('')
+                  sendMessage({ text: prompt })
                 }}
                 className="text-xs bg-secondary text-secondary-foreground px-3 py-1.5 rounded-lg border border-border hover:border-primary/40 hover:bg-primary/5 transition-all"
               >
                 {prompt}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Coach reply chips — shown after each assistant message */}
+      {!isStreaming && displayMessages.length > 1 && displayMessages[displayMessages.length - 1]?.role === 'assistant' && (
+        <div className="px-4 pb-2">
+          <div className="flex flex-wrap gap-2">
+            {COACH_CHIPS.map((chip) => (
+              <button
+                key={chip}
+                onClick={() => {
+                  setInputValue('')
+                  sendMessage({ text: chip })
+                }}
+                className="text-xs bg-secondary/80 text-secondary-foreground px-3 py-1.5 rounded-full border border-border hover:border-primary/40 hover:bg-primary/5 transition-all"
+              >
+                {chip}
               </button>
             ))}
           </div>
@@ -140,7 +168,7 @@ export default function ChatInterface({ userProfile, pendingTopic, onTopicConsum
               e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px'
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Ask Natalie anything about AI..."
+            placeholder="Ask Athena anything about AI..."
             rows={1}
             className="flex-1 resize-none bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none leading-relaxed"
             style={{ minHeight: '24px', maxHeight: '120px' }}
@@ -161,7 +189,7 @@ export default function ChatInterface({ userProfile, pendingTopic, onTopicConsum
           </Button>
         </div>
         <p className="text-center text-xs text-muted-foreground mt-2">
-          Natalie can make mistakes. Always verify important information.
+          Athena can make mistakes. Always verify important information.
         </p>
       </div>
     </div>
@@ -187,7 +215,7 @@ function MessageBubble({ message }: { message: UIMessage }) {
           className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-bold shrink-0 mt-0.5"
           aria-hidden="true"
         >
-          N
+          A
         </div>
       )}
       <div
@@ -251,7 +279,7 @@ function TypingIndicator() {
   return (
     <div className="flex gap-3 justify-start">
       <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-bold shrink-0">
-        N
+        A
       </div>
       <div className="bg-card border border-border rounded-2xl rounded-bl-sm px-4 py-3">
         <div className="flex gap-1 items-center h-4">
